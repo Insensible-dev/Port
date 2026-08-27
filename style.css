@@ -8,11 +8,11 @@
     --text: #f3f3f3;
     --muted: #929297;
 
-    --red: #ef3030;
-    --red-light: #ff5151;
+    --red: #5f2020;
+    --red-light: #882d2d;
 
     --border: rgba(255, 255, 255, 0.09);
-    --border-hover: rgba(239, 48, 48, 0.55);
+    --border-hover: rgba(120, 46, 46, 0.55);
 
     --radius: 16px;
     --container: 1180px;
@@ -106,6 +106,10 @@ a {
     text-decoration: none;
 }
 
+/* =========================================================
+   LAYOUT
+========================================================= */
+
 header,
 nav,
 main,
@@ -142,7 +146,6 @@ section {
 section:nth-child(even) {
     animation-delay: 0.1s;
 }
-
 
 .logo {
     position: relative;
@@ -291,6 +294,7 @@ nav a.active::after {
     flex-wrap: wrap;
 }
 
+
 .hero::after {
     content: '';
 
@@ -404,6 +408,7 @@ input[type='submit']:hover {
 }
 
 
+
 .btn-secondary {
     color: var(--text);
 
@@ -420,7 +425,6 @@ input[type='submit']:hover {
     border-color: rgba(255, 255, 255, 0.2);
 }
 
-/* Shine animation */
 
 .btn-primary {
     overflow: hidden;
@@ -503,6 +507,7 @@ article:hover,
     background: var(--surface-hover);
 }
 
+
 .card::before,
 .project::before,
 .skill::before,
@@ -542,6 +547,8 @@ article p,
 .service p {
     color: var(--muted);
 }
+
+
 .card-number {
     display: block;
 
@@ -578,6 +585,7 @@ article p,
     transform: translateX(4px);
 }
 
+
 .card:nth-child(1),
 .project:nth-child(1),
 .skill:nth-child(1),
@@ -606,6 +614,7 @@ article p,
     animation-delay: 0.4s;
 }
 
+
 .section-title {
     transition:
         transform 0.4s ease,
@@ -615,6 +624,7 @@ article p,
 .section-title:hover {
     transform: translateX(6px);
 }
+
 
 #a-propos > p:last-child {
     max-width: 760px;
@@ -675,6 +685,7 @@ select:focus {
     background: #151519;
 }
 
+
 footer {
     padding: 45px 0;
 
@@ -686,6 +697,7 @@ footer {
 
     animation: footerAppear 1s ease-out both;
 }
+
 
 @keyframes reveal {
     from {
@@ -877,6 +889,7 @@ footer {
     }
 }
 
+
 @media (max-width: 700px) {
 
     header,
@@ -963,6 +976,7 @@ footer {
         grid-template-columns: 1fr;
     }
 }
+
 
 @media (prefers-reduced-motion: reduce) {
 
@@ -1121,7 +1135,6 @@ footer {
 
     font-size: 0.95rem;
 }
-
 
 @media (max-width: 700px) {
 
