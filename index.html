@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Portfolio moderne et interactif">
+  <title>Portfolio — Insensible</title>
+
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<script src="script.js">const DISCORD_ID = "659094544939352064";
+const API_URL = `https://api.lanyard.rest/v1/users/${DISCORD_ID}`;
+
+const avatar = document.getElementById("discord-avatar");
+const name = document.getElementById("discord-name");
+const statusText = document.getElementById("discord-status");
+const statusDot = document.getElementById("discord-status-dot");
+const activityText = document.getElementById("discord-activity-text");
+
+const statusNames = {
+    online: "En ligne",
+    idle: "Inactif",
+    dnd: "Ne pas déranger",
+    offline: "Hors ligne"
+};
+
+function getAvatarUrl(user) {
+    if (!user.avatar) {
+        return `https://cdn.discordapp.com/embed/avatars/${Number(user.discriminator) % 5}.png`;
+    }
+
+    const extension = user.avatar.startsWith("a_") ? "gif" : "png";
+
+    return `https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.${extension}?size=256`;
+}
+
+function updateStatus(data) {
+    const user = data.discord_user;
+    const status = data.discord_status || "offline";
+
+    // Profil
+    name.textContent = user.global_name || user.username;
+    avatar.src = getAvatarUrl(user);
+    avatar.alt = `Avatar de ${user.global_name || user.username}`;
+
+    // Statut
+    statusDot.className = "";
+    statusDot.classList.add(status);
+
+    statusText.textContent = statusNames[status] || "Inconnu";
+
+    // Spotify
+    if (data.listening_to_spotify && data.spotify) {
+        const spotify = data.spotify;
+
+        activityText.innerHTML = `
+            <strong>${escapeHTML(spotify.song)}</strong>
+            <br>
+            <span>par ${escapeHTML(spotify.artist)}</span>
+        `;
+
+        activityText.classList.add("spotify-active");
+
+        // Affiche la pochette si elle existe
+        let cover = document.getElementById("spotify-cover");
+
+        if (!cover) {
+            cover = document.createElement("img");
+            cover.id = "spotify-cover";
+            cover.className = "spotify-cover";
+
+            document
+                .getElementById("discord-activity")
+                .prepend(cover);
+        }
+
+        cover.src = spotify.album_art_url;
+        cover.alt = `Pochette de ${spotify.album}`;
+    } else {
+        activityText.textContent = "Aucune activité détectée";
+        activityText.classList.remove("spotify-active");
+
+        const cover = document.getElementById("spotify-cover");
+
+        if (cover) {
+            cover.remove();
+        }
+    }
+}
+
+function escapeHTML(text) {
+    const div = document.createElement("div");
+    div.textContent = text || "";
+    return div.innerHTML;
+}
+
+async function fetchDiscordStatus() {
+    try {
+        const response = await fetch(API_URL);
+
+        if (!response.ok) {
+            throw new Error(`HTTP ${response.status}`);
+        }
+
+        const result = await response.json();
+
+        if (!result.success || !result.data) {
+            throw new Error("Réponse Lanyard invalide");
+        }
+
+        updateStatus(result.data);
+
+    } catch (error) {
+        console.error("Impossible de récupérer le statut Discord :", error);
+
+        name.textContent = "Insomnie";
+        statusText.textContent = "Statut indisponible";
+
+        statusDot.className = "";
+        statusDot.classList.add("offline");
+
+        activityText.textContent = "Impossible de récupérer l'activité";
+    }
+}
+
+// Première récupération
+fetchDiscordStatus();
+
+// Actualisation toutes les 15 secondes
+setInterval(fetchDiscordStatus, 15000);
+</script>
+
+
+<body>
+  <header>
+    <nav class="container" aria-label="Navigation principale">
+      <a class="logo" href="#accueil">Insensible</a>
+      <ul class="nav-links">
+        <li><a href="#projets">Projets</a></li>
+        <li><a href="#a-propos">À propos</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero container" id="accueil">
+      <div>
+        <p class="eyebrow">Designer · Développeur · Créatif</p>
+        <h1>Un développeur motivé pour tout <span>challenge.</span></h1>
+        <p>Bienvenue dans mon portfolio. Je transforme des idées en interfaces modernes, utiles et mémorables.</p>
+        <div class="actions">
+          <a class="btn btn-primary" href="#projets">Découvrir mes projets ↗</a>
+          <a class="btn btn-secondary" href="#contact">Me contacter</a>
+        </div>
+      </div>
+      <figure class="profile-photo">
+        <img src="img/2af568230f27ebb41f8658495e340d8f.jpg" alt="Portrait de Insensible">
+      </figure>
+    </section>
+    <section class="container" id="discord">
+    <p class="eyebrow">Discord</p>
+    <h2 class="section-title">Je suis actuellement...</h2>
+
+    <div class="discord-card">
+        <div class="discord-profile">
+            <div class="discord-avatar-wrapper">
+                <img
+                    id="discord-avatar"
+                    src=""
+                    alt="Avatar Discord"
+                >
+                <span id="discord-status-dot"></span>
+            </div>
+
+            <div class="discord-info">
+                <h3 id="discord-name">Chargement...</h3>
+                <p id="discord-status">Connexion à Discord...</p>
+            </div>
+        </div>
+
+        <div class="discord-activity" id="discord-activity">
+            <span class="activity-label">ACTIVITÉ</span>
+            <p id="discord-activity-text">
+                Aucune activité détectée
+            </p>
+        </div>
+      </div>
+     </section>
+
+    <section class="container" id="projets">
+      <p class="eyebrow">Sélection</p>
+      <h2 class="section-title">Projets récents</h2>
+      <div class="projects">
+        <article class="card"><span class="card-number">01</span><h3>Projet Portfolio</h3><p>Un portfolio moderne et interactif.</p></article>
+        <article class="card"><span class="card-number">02</span><h3>Projet Map</h3><p>Une carte interactive pour explorer les lieux.</p></article>
+        <article class="card"><span class="card-number">03</span><h3>Maitrise du CSS et HTML 5</h3><p>Maîtrise des dernières fonctionnalités du CSS et HTML.</p></article>
+      </div>
+    </section>
+
+    <section class="container" id="a-propos">
+      <p class="eyebrow">À propos</p>
+      <h2 class="section-title">Créer avec intention.</h2>
+      <p>Je suis un développeur passionné par la création de site et passioner par le développement web et web mobile j'apprend le développement web mobile depuis deja de nombreus mois en autodidacte je suis en train de developper mes compétences.</p>
+    </section>
+
+    <section class="container" id="contact">
+      <div class="contact"><p class="eyebrow">Un projet en tête ?</p><h2 class="section-title">Construisons quelque chose.</h2><a class="btn btn-primary" href="mailto:Insensible.dev@gmail.com">Écrivez-moi →</a></div>
+    </section>
+  </main>
+  <footer>© 2026 Insensible — Tous droits réservés.</footer>
+</body>
+</html>
