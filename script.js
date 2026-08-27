@@ -118,3 +118,7 @@ fetchDiscordStatus();
 
 // Actualisation toutes les 15 secondes
 setInterval(fetchDiscordStatus, 15000);
+
+
+// Actualisation toutes les 15 secondes
+setInterval(fetchDiscordStatus, 15000);
