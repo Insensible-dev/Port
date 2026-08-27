@@ -20,10 +20,6 @@
     --shadow: 0 20px 50px rgba(0, 0, 0, 0.25);
 }
 
-/* =========================================================
-   RESET
-========================================================= */
-
 * {
     box-sizing: border-box;
 }
@@ -110,10 +106,6 @@ a {
     text-decoration: none;
 }
 
-/* =========================================================
-   LAYOUT
-========================================================= */
-
 header,
 nav,
 main,
@@ -151,9 +143,6 @@ section:nth-child(even) {
     animation-delay: 0.1s;
 }
 
-/* =========================================================
-   NAVIGATION
-========================================================= */
 
 .logo {
     position: relative;
@@ -247,10 +236,6 @@ nav a.active::after {
     width: 100%;
 }
 
-/* =========================================================
-   HERO
-========================================================= */
-
 .hero {
     position: relative;
 
@@ -306,8 +291,6 @@ nav a.active::after {
     flex-wrap: wrap;
 }
 
-/* Small decorative line instead of giant glowing circle */
-
 .hero::after {
     content: '';
 
@@ -327,9 +310,6 @@ nav a.active::after {
     animation: float 6s ease-in-out infinite;
 }
 
-/* =========================================================
-   PROFILE
-========================================================= */
 
 .profile-photo {
     position: relative;
@@ -380,9 +360,6 @@ nav a.active::after {
     animation: photoPulse 3s ease-in-out infinite;
 }
 
-/* =========================================================
-   BUTTONS
-========================================================= */
 
 button,
 .btn,
@@ -426,7 +403,6 @@ input[type='submit']:hover {
     background: var(--red-light);
 }
 
-/* Secondary button */
 
 .btn-secondary {
     color: var(--text);
@@ -478,9 +454,6 @@ input[type='submit']:hover {
     left: 140%;
 }
 
-/* =========================================================
-   CARDS / PROJECTS / SKILLS
-========================================================= */
 
 .cards,
 .projects,
@@ -530,8 +503,6 @@ article:hover,
     background: var(--surface-hover);
 }
 
-/* Subtle red corner */
-
 .card::before,
 .project::before,
 .skill::before,
@@ -571,9 +542,6 @@ article p,
 .service p {
     color: var(--muted);
 }
-
-/* Card numbers */
-
 .card-number {
     display: block;
 
@@ -610,8 +578,6 @@ article p,
     transform: translateX(4px);
 }
 
-/* Stagger */
-
 .card:nth-child(1),
 .project:nth-child(1),
 .skill:nth-child(1),
@@ -640,10 +606,6 @@ article p,
     animation-delay: 0.4s;
 }
 
-/* =========================================================
-   SECTION TITLES
-========================================================= */
-
 .section-title {
     transition:
         transform 0.4s ease,
@@ -653,10 +615,6 @@ article p,
 .section-title:hover {
     transform: translateX(6px);
 }
-
-/* =========================================================
-   ABOUT / CONTACT
-========================================================= */
 
 #a-propos > p:last-child {
     max-width: 760px;
@@ -685,10 +643,6 @@ article p,
 
     margin-bottom: 30px;
 }
-
-/* =========================================================
-   FORMS
-========================================================= */
 
 input,
 textarea,
@@ -721,10 +675,6 @@ select:focus {
     background: #151519;
 }
 
-/* =========================================================
-   FOOTER
-========================================================= */
-
 footer {
     padding: 45px 0;
 
@@ -736,10 +686,6 @@ footer {
 
     animation: footerAppear 1s ease-out both;
 }
-
-/* =========================================================
-   ANIMATIONS
-========================================================= */
 
 @keyframes reveal {
     from {
@@ -931,10 +877,6 @@ footer {
     }
 }
 
-/* =========================================================
-   MOBILE
-========================================================= */
-
 @media (max-width: 700px) {
 
     header,
@@ -1022,10 +964,6 @@ footer {
     }
 }
 
-/* =========================================================
-   ACCESSIBILITY
-========================================================= */
-
 @media (prefers-reduced-motion: reduce) {
 
     html {
@@ -1042,10 +980,6 @@ footer {
     }
     
 }
-
-/* =========================================================
-   DISCORD
-========================================================= */
 
 .discord-card {
     position: relative;
@@ -1188,9 +1122,6 @@ footer {
     font-size: 0.95rem;
 }
 
-/* =========================================================
-   DISCORD MOBILE
-========================================================= */
 
 @media (max-width: 700px) {
 
@@ -1213,9 +1144,6 @@ footer {
         border-left: 0;
     }
 }
-/* =========================================================
-   DISCORD SPOTIFY
-========================================================= */
 
 #discord-activity {
     display: grid;
